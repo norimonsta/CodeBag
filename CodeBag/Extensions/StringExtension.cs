@@ -95,5 +95,22 @@ namespace CodeBag.Extensions
             return substrings != null
                 && substrings.Any(s => value.IndexOf(s, comparisonType) >= 0);
         }
+
+        //There are several ways to do get the result, but this should be one of the most efficient.
+        public static IEnumerable<string> GetLines(this string value, bool removeEmptyLines = false)
+        {
+            using (var sr = new System.IO.StringReader(value))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (removeEmptyLines && String.IsNullOrWhiteSpace(line))
+                    {
+                        continue;
+                    }
+                    yield return line;
+                }
+            }
+        }
     }
 }

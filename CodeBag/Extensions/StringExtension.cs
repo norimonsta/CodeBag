@@ -112,5 +112,15 @@ namespace CodeBag.Extensions
                 }
             }
         }
+
+        public static string Encrypt(this string value, string password)
+        {
+            return Helpers.AESThenHMAC.SimpleEncryptWithPassword(value, password);
+        }
+
+        public static string Decrypt(this string value, string password)
+        {
+            return Helpers.AESThenHMAC.SimpleDecryptWithPassword(value, password);
+        }
     }
 }
